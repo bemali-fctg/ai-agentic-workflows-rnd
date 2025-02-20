@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zodiac Sign App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Find Your Random Zodiac Sign!</h1>
+        <form id="zodiacForm">
+            <label for="age">Enter your age:</label>
+            <input type="number" id="age" name="age" required>
+            <button type="submit">Get Zodiac Sign</button>
+        </form>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        document.getElementById('zodiacForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const age = document.getElementById('age').value;
+
+            const response = await fetch('/get-zodiac', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ age })
+            });
+
+            const data = await response.json();
+            if (data.zodiac) {
+                document.getElementById('result').textContent = `Your random zodiac sign is: ${data.zodiac}`;
+            } else {
+                document.getElementById('result').textContent = 'Error: ' + data.error;
+            }
+        });
+    </script>
+</body>
+</html>
