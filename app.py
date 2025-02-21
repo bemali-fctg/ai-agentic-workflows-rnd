@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 zodiac_signs = [
     "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
-    "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+    "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces", "other random"
 ]
 
 @app.route('/')
